@@ -8,22 +8,28 @@ class TokenService {
         )
     }
 checkToken(req){
-    const token = req.headers.authorization.split(" ")[1]
     try{
-        const decoded = jwt.verify(token, 'secret-key')
-        const now = new Date()
-        const tokenTime = new Date(decoded.exp+"000"-0)
-        if(tokenTime<now){
-            console.log("token expired")
+        const token = req.headers.authorization.split(" ")[1]
+        try{
+            const decoded = jwt.verify(token, 'secret-key')
+            const now = new Date()
+            const tokenTime = new Date(decoded.exp+"000"-0)
+            if(tokenTime<now){
+                console.log("token expired")
+                return 0
+            }else{
+                console.log(decoded)
+                return decoded
+            }
+        }catch(err){
+            console.log(err)
             return 0
-        }else{
-            console.log(decoded)
-            return decoded
         }
-    }catch(err){
-        console.log(err)
+    }catch(e){
+        console.log(e)
         return 0
     }
+    
     
 }
 

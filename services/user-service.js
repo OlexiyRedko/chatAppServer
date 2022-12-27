@@ -26,6 +26,10 @@ class UserService {
             return[0, "user not found"]
         }
     }
+    async getUserInfo(id){
+        const userInfo = await BdService.getUserInfo(id)
+        return userInfo
+    }
 
 }
 
